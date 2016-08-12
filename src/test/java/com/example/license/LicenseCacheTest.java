@@ -54,7 +54,7 @@ public class LicenseCacheTest {
         Assertions.assertThat(licenseCache.getLicense().getName()).isEqualTo("MIT");
     }
 
-    private void awaitForLicense(LicenseCache licenseCache) {
+    public static void awaitForLicense(LicenseCache licenseCache) {
         await().atMost(1, SECONDS).until(() -> {
             try {
                 licenseCache.getLicense();
