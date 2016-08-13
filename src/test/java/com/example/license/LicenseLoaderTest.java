@@ -1,6 +1,5 @@
 package com.example.license;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.when;
 
@@ -22,6 +23,15 @@ public class LicenseLoaderTest {
 
     @Mock
     private ResourceLoader resourceLoader;
+
+    @Test
+    public void contructorRequiresArgs() {
+        assertThatThrownBy(() -> new LicenseLoader(null, "someLocation"))
+                .isInstanceOf(NullPointerException.class);
+
+        assertThatThrownBy(() -> new LicenseLoader(resourceLoader, null))
+                .isInstanceOf(NullPointerException.class);
+    }
 
     @Test
     public void fetchReturnsTheLicense() {
@@ -37,7 +47,7 @@ public class LicenseLoaderTest {
         License license = ll.fetch();
 
         // then
-        Assertions.assertThat(license.getName()).isEqualTo("Beer License");
+        assertThat(license.getName()).isEqualTo("Beer License");
     }
 
     @Test
@@ -54,7 +64,7 @@ public class LicenseLoaderTest {
         Throwable ex = catchThrowable(ll::fetch);
 
         // then
-        Assertions.assertThat(ex).isInstanceOf(ResourceAccessException.class);
+        assertThat(ex).isInstanceOf(ResourceAccessException.class);
     }
 
     @Test
@@ -69,7 +79,7 @@ public class LicenseLoaderTest {
         Throwable ex = catchThrowable(ll::fetch);
 
         // then
-        Assertions.assertThat(ex).isInstanceOf(ResourceAccessException.class);
+        assertThat(ex).isInstanceOf(ResourceAccessException.class);
     }
 
     @Test
@@ -94,7 +104,7 @@ public class LicenseLoaderTest {
         Throwable ex = catchThrowable(ll::fetch);
 
         // then
-        Assertions.assertThat(ex).isInstanceOf(ResourceAccessException.class);
+        assertThat(ex).isInstanceOf(ResourceAccessException.class);
     }
 
 }

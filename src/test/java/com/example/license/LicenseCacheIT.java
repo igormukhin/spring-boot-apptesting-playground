@@ -19,7 +19,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 @TestPropertySource(properties = {
-            "server.port=2800",
+            "server.port=48080",
             "license.location=http://localhost:${server.port}/tests/license"
         })
 public class LicenseCacheIT {

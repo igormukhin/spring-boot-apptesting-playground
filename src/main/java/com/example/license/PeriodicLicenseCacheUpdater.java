@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class PeriodicLicenseCacheUpdater {
 
-    private LicenseCache licenseCache;
-    private TaskScheduler taskScheduler;
+    final private LicenseCache licenseCache;
+    final private TaskScheduler taskScheduler;
 
-    private String updateCron;
+    final private String updateCron;
 
     @Autowired
     public PeriodicLicenseCacheUpdater(LicenseCache licenseCache, TaskScheduler taskScheduler) {

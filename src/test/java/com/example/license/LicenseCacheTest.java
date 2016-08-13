@@ -11,15 +11,12 @@ import org.mockito.stubbing.Answer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.client.ResourceAccessException;
 
-import java.time.Clock;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.jayway.awaitility.Awaitility.await;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LicenseCacheTest {
@@ -75,8 +72,7 @@ public class LicenseCacheTest {
                 .thenReturn(new License("MIT"));
 
         // when
-        LicenseCache licenseCache = new LicenseCache(licenseLoader, taskScheduler,
-                Duration.ofMillis(10L), Clock.systemDefaultZone());
+        LicenseCache licenseCache = new LicenseCache(licenseLoader, taskScheduler, Duration.ofMillis(10L));
 
         // then
         awaitForLicense(licenseCache);
@@ -99,8 +95,7 @@ public class LicenseCacheTest {
                 .thenReturn(new License("MIT"));
 
         // when
-        licenseCacheRef.set(new LicenseCache(licenseLoader, taskScheduler,
-                Duration.ofMillis(20L), Clock.systemDefaultZone()));
+        licenseCacheRef.set(new LicenseCache(licenseLoader, taskScheduler, Duration.ofMillis(20L)));
 
         // then
         awaitForLicense(licenseCacheRef.get());

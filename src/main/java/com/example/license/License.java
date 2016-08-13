@@ -1,19 +1,16 @@
 package com.example.license;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class License implements Serializable {
 
     private String name;
 
-    public License() {
-    }
-
-    public License(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

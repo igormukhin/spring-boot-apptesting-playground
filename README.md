@@ -6,7 +6,7 @@ Used:
 * Spring Boot 1.4
 * AssertJ
 * Awaitability
-
+* Project Lombok
 
 ### Commands
 
